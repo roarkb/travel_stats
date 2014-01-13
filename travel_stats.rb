@@ -4,15 +4,16 @@ require "date"
 
 # "country name" => [day count of last visit, arrival date if current country? else 0]
 COUNTRIES = {
-  :thailand    => [20, 0],
+  :thailand    => [42, 0],
   :india       => [51, 0],
   :nepal       => [49, 0],
   :indonesia   => [86, 0],
-  :malaysia    => [26, 0],
+  :malaysia    => [27, 0],
   :brunei      => [3,  0],
-  :singapore   => [5,  0],
+  :singapore   => [14, 0],
   :usa         => [13, 0],
-  :philippines => [0, "2013-11-24"],
+  :philippines => [19, 0],
+  :myanmar     => [0, "2014-1-12"],
 }
 
 TODAY = Date.today
@@ -40,11 +41,11 @@ total_days = (TODAY - Date.strptime("2013-3-11", "%Y-%m-%d")).to_i
 spacer = country_name_length + 1
 total_country_days = 0
 
-puts "\ntotal days traveled: #{total_days}"
 puts
 country_list.sort_by {|k,v| v}.reverse.each do |country,days|
   total_country_days += days
   printf("%-#{spacer}s %s\n", "#{country.to_s}:", days)
 end
 
-puts "\nnights spent in transit: #{total_days - total_country_days}\n\n"
+puts "\ntotal days traveled: #{total_days}"
+puts "aprox nights spent in transit: #{total_days - total_country_days}\n\n"
