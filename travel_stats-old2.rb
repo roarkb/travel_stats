@@ -1,10 +1,8 @@
 #!/usr/bin/env ruby
 
-# calculate accumulative days i have spent in each country
-
 require "date"
 
-# "country name" => [list each date i entered a country]
+# "country name" => [list each date you entered a country]
 COUNTRIES = {
   :thailand    => ["2013-3-12", "2013-12-23", "2014-2-11", "2014-3-1"],
   :india       => ["2013-4-2", "2013-7-1"],
@@ -16,7 +14,6 @@ COUNTRIES = {
   :usa         => ["2013-11-10"],
   :philippines => ["2013-11-25", "2014-3-8"],
   :myanmar     => ["2014-1-14"],
-  :hong_kong   => ["2014-4-20"],
 }
 
 SPACER = 12
@@ -59,21 +56,8 @@ p rollup
 p rollup.invert
 puts
 
-sorted_rollup = rollup.invert.sort.reverse
-total_days = (Date.today - Date.strptime(START_DATE, "%Y-%m-%d")).to_i
-
-sorted_rollup.each do |days,country|
+rollup.invert.sort.reverse.each do |days,country|
   printf("%-#{SPACER}s %s\n", "#{country}:", days)
 end
 
-puts "\ntotal days traveled: #{total_days}\n\n"
-
-puts "\nHTML:\n\n<table>"
-
-sorted_rollup.each do |days,country|
-  puts "<tr><td>#{country}: </td><td>#{days}</td></tr>"
-end
-
-puts "<tr><td><b>total days traveled: </b></td><td><b>#{total_days}</b></td></tr>"
-puts "</table>\n\n"
-
+puts "\ntotal days traveled: #{(Date.today - Date.strptime(START_DATE, "%Y-%m-%d")).to_i}\n\n"
