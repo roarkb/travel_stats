@@ -17,10 +17,16 @@ COUNTRIES = {
   :philippines => ["2013-11-25", "2014-3-8"],
   :myanmar     => ["2014-1-14"],
   :hong_kong   => ["2014-4-20"],
+  :germany     => ["2014-4-30"],
+  :switzerland => ["2014-5-4"],
 }
 
 SPACER = 12
 START_DATE = "2013-3-11"
+
+def remove_underscores(text)
+  text.split("_").join(" ")
+end
 
 visits = []
 COUNTRIES.each do |country,dates|
@@ -63,7 +69,7 @@ sorted_rollup = rollup.invert.sort.reverse
 total_days = (Date.today - Date.strptime(START_DATE, "%Y-%m-%d")).to_i
 
 sorted_rollup.each do |days,country|
-  printf("%-#{SPACER}s %s\n", "#{country}:", days)
+  printf("%-#{SPACER}s %s\n", "#{remove_underscores(country)}:", days)
 end
 
 puts "\ntotal days traveled: #{total_days}\n\n"
@@ -71,9 +77,9 @@ puts "\ntotal days traveled: #{total_days}\n\n"
 puts "\nHTML:\n\n<table>"
 
 sorted_rollup.each do |days,country|
-  puts "<tr><td>#{country}: </td><td>#{days}</td></tr>"
+  puts "<tr><td>#{remove_underscores(country)} </td><td>#{days}</td></tr>"
 end
 
-puts "<tr><td><b>total days traveled: </b></td><td><b>#{total_days}</b></td></tr>"
+puts "<tr><td><b>total days traveled </b></td><td><b>#{total_days}</b></td></tr>"
 puts "</table>\n\n"
 
