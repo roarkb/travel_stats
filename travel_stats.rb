@@ -19,6 +19,7 @@ COUNTRIES = {
   :hong_kong   => ["2014-4-20"],
   :germany     => ["2014-4-30"],
   :switzerland => ["2014-5-4"],
+  :kyrgyzstan  => ["2014-6-28"],
 }
 
 SPACER = 12
@@ -28,6 +29,7 @@ def remove_underscores(text)
   text.split("_").join(" ")
 end
 
+# convert COUNTRIES hash into list of [date,country] arrays ordered by date
 visits = []
 COUNTRIES.each do |country,dates|
   dates.each do |date|
@@ -35,6 +37,7 @@ COUNTRIES.each do |country,dates|
   end
 end
 
+# add duration of each country visit to visits: [ [date,country.duration], ...]
 visits.each_with_index do |visit,index|
   date = visit[0]
 
@@ -45,6 +48,7 @@ visits.each_with_index do |visit,index|
   end
 end
 
+# add up total days per country in rollup hash: {country => total days, ...}
 rollup = {}
 visits.each do |visit|
   country = visit[1]
