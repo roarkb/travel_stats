@@ -24,7 +24,7 @@ COUNTRIES = {
 
 SPACER = 15
 START_DATE = "2013-3-11"
-END_DATE = nil # TODO: incorperate end date into this
+#END_DATE = nil # TODO: incorperate end date into this
 TOTAL_COUNTRIES = COUNTRIES.length
 
 def remove_underscores(text)
@@ -76,30 +76,27 @@ visits.each do |visit|
   end
 end
 
-sorted_rollup = rollup.invert.sort.reverse
+sorted_rollup = rollup.sort_by { |k,v| v }.reverse # turn into list sorted by days descending
 total_days = (Date.today - Date.strptime(START_DATE, "%Y-%m-%d")).to_i
 
 # HTML view
 puts "\nHTML:\n\n<table>\n<tr><td><b>country</b></td><td><b>days</b></td><td><b>visits</b></td></tr>"
 
-sorted_rollup.each do |days,country|
+sorted_rollup.each do |e|
+  country = e[0]
+  days = e[1]
   puts "<tr><td>#{remove_underscores(country)} </td><td>#{days}</td><td>#{total_visits(country)}</td></tr>"
 end
 
 puts "</table>\n<table>\n<tr><td><b>total days traveled </b></td><td><b>#{total_days}</b></td></tr>\n</table>\n\n"
 
-# DEBUG view
-# TODO: issue with using invert - if total days of a country is the same as another it will get overwritten because hash keys have to be unique
-puts "\nDEBUG:"
-p rollup
-p rollup.invert
-puts
-
 # human readable view
 puts "\nCOUNTRIES (#{TOTAL_COUNTRIES})  DAYS (#{total_days}) | VISITS\n-----------------------------------"
 
-sorted_rollup.each do |days,country|
-    printf("%-#{SPACER}s %s\n", "#{remove_underscores(country)}:", "#{front_pad(days)}         | #{total_visits(country)}")
+sorted_rollup.each do |e|
+  country = e[0]
+  days = e[1]
+  printf("%-#{SPACER}s %s\n", "#{remove_underscores(country)}:", "#{front_pad(days)}         | #{total_visits(country)}")
 end
 
 puts
