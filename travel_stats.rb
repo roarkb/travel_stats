@@ -31,10 +31,12 @@ def remove_underscores(text)
   text.split("_").join(" ")
 end
 
-# add blank space before a single digit number (returns string)
+# add blank space(s) before a single/douple digit numbers
 def front_pad(num) # int
-  if num.to_s.length == 1
+  if num.to_s.length == 2
     return " #{num}"
+  elsif num.to_s.length == 1
+    return "  #{num}"
   else
     return num
   end
@@ -96,7 +98,7 @@ puts "\nCOUNTRIES (#{TOTAL_COUNTRIES})  DAYS (#{total_days}) | VISITS\n---------
 sorted_rollup.each do |e|
   country = e[0]
   days = e[1]
-  printf("%-#{SPACER}s %s\n", "#{remove_underscores(country)}:", "#{front_pad(days)}         | #{total_visits(country)}")
+  printf("%-#{SPACER}s %s\n", "#{remove_underscores(country)}:", "#{front_pad(days)}        | #{total_visits(country)}")
 end
 
 puts
