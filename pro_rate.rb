@@ -7,8 +7,8 @@ require "date"
 abort "\nEXAMPLE: '#{$0} 2014-6-18 2014-7-17 19.94'\n\n" unless ARGV.length == 3
 
 IN_DATE = Date.strptime("2014-7-5", "%Y-%m-%d")
-#OUT_DATE = Date.strptime("-----", "%Y-%m-%d")
-OUT_DATE = nil
+OUT_DATE = Date.strptime("2015-1-1", "%Y-%m-%d")
+#OUT_DATE = nil
 
 start_date = Date.strptime(ARGV[0], "%Y-%m-%d") # YYYY-MM-DD
 end_date = Date.strptime(ARGV[1], "%Y-%m-%d") # YYYY-MM-DD
